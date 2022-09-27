@@ -1,17 +1,45 @@
 // Global variables:
 var currentDateEl = $('#currentDay');
+// var textArea = $('<textarea>');
+// var saveButton = $('<button>');
+var timeOfDay = ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+var timeDiv = $('<div>');
+
+console.log(typeof parseInt(timeOfDay[0]));
+
+
+
+function compareTime (i) {
+    // var currentHour = parseInt (moment().format('HH'));
+    var currentHour = 10;
+    var timeNum = parseInt (timeOfDay[i]);
+    if(currentHour>timeNum) {
+        $(textArea).attr("class", "past")
+    } 
+    else if(currentHour<timeNum) {
+        $(textArea).attr("class", "future")
+    }
+    else {
+        $(textArea).attr("class", "present")
+    }
+}
+
+
+for(var i = 0; i<timeOfDay.length; i++) {
 var textArea = $('<textarea>');
 var saveButton = $('<button>');
-
-
-
+var lineBreak = $('<br>');
+$("body").append(timeOfDay[i]);
 $("body").append(textArea);
 $("body").append(saveButton);
-
-
+$("body").append(lineBreak);
 $(saveButton).attr("class", "saveBtn");
 $(saveButton).text("submit");
 $(textArea).attr("class", "textarea");
+compareTime(i)
+}
+
+
 
 
 
@@ -30,11 +58,10 @@ displayTime()
 
 
 // add event listner on button
-saveButton.on('click', function() {
-    var textInput = $('textarea').val();
+saveBtn.on('click', function() {
+    // var textInput = $('textarea').val();
     console.log("Hello World");
-    localStorage.setItem('savedText', textInput);
-    // event.preventDefault()
+    // localStorage.setItem('savedText', textInput);
     });
     
     var savedText = localStorage.getItem('savedText');
