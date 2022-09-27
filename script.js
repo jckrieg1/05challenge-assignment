@@ -10,8 +10,7 @@ console.log(typeof parseInt(timeOfDay[0]));
 
 
 function compareTime (i) {
-    // var currentHour = parseInt (moment().format('HH'));
-    var currentHour = 10;
+    var currentHour = parseInt (moment().format('HH'));
     var timeNum = parseInt (timeOfDay[i]);
     if(currentHour>timeNum) {
         $(textArea).attr("class", "past")
@@ -25,22 +24,42 @@ function compareTime (i) {
 }
 
 
+// for(var i = 0; i<timeOfDay.length; i++) {
+// var textArea = $('<textarea>');
+// var saveButton = $('<button>');
+// var lineBreak = $('<br>');
+// $("body").append(timeOfDay[i]);
+// $("body").append(textArea);
+// $("body").append(saveButton);
+// $("body").append(lineBreak);
+// $(saveButton).attr("class", "saveBtn");
+// $(saveButton).text("submit");
+// $(textArea).attr("class", "textarea");
+// compareTime(i)
+// }
+
+
 for(var i = 0; i<timeOfDay.length; i++) {
-var textArea = $('<textarea>');
-var saveButton = $('<button>');
-var lineBreak = $('<br>');
-$("body").append(timeOfDay[i]);
-$("body").append(textArea);
-$("body").append(saveButton);
-$("body").append(lineBreak);
-$(saveButton).attr("class", "saveBtn");
-$(saveButton).text("submit");
-$(textArea).attr("class", "textarea");
-compareTime(i)
-}
-
-
-
+    var hourBlock = $('<div>');
+    var hourTime = $('<div>');
+    var textArea = $('<textarea>');
+    var saveButton = $('<button>');
+    // var lineBreak = $('<br>');
+    $("body").append(hourBlock);
+    $(hourBlock).append(hourTime);
+    $(hourTime).append(timeOfDay[i]);
+    $(hourBlock).append(textArea);
+    $(hourBlock).append(saveButton);
+    $(saveButton).attr("class", "saveBtn");
+    $(saveButton).text("Save");
+    $(textArea).attr("class", "textarea");
+    $(hourBlock).attr("id", timeOfDay[i]);
+    $(hourTime).attr("class", "hour");
+    $(textArea).attr("class", "description");
+    $(textArea).attr("id", timeOfDay[i]);
+    console.log(textArea);
+    compareTime(i)
+    }
 
 
 
@@ -53,16 +72,28 @@ function displayTime () {
 
 displayTime()
 
+console.log(textArea)
+
+var currInput = 
+
 // Text in section should save to local storage;
 // localStorage.setItem('textInput');
 
 
 // add event listner on button
-saveBtn.on('click', function() {
+$('.saveBtn').on('click', function() {
+    let time = $(this).parent().attr("id");
+    var textInput = $('textArea').find('#' + time).val();
+  console.log(time);
+  console.log(textInput);
+  console.log("Hello world, this the button for" + time);
+});
+
     // var textInput = $('textarea').val();
-    console.log("Hello World");
+    // var id = $(this.attr('id'));
+    // console.log(id)
+    // console.log("Hello World");
     // localStorage.setItem('savedText', textInput);
-    });
     
     var savedText = localStorage.getItem('savedText');
 
